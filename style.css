@@ -30,7 +30,7 @@ h1 {
 }
 
 
-#chart1, #chart2 {
+#chart1, #chart2,#chart3 {
   width: 100%;
   height: 400px;
   margin-top: 20px; /* Add margin between heading and chart */
