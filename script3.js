@@ -1,50 +1,56 @@
 // Load the data from CSV file
 d3.csv("cases_by_age_group.csv").then(function(data) {
-  // Convert percentage values to numbers
-  data.forEach(function(d) {
-    d.Percent_of_cases = +d.Percent_of_cases;
+    // Convert percentage values to numbers
+    data.forEach(function(d) {
+      d.Percent_of_cases = +d.Percent_of_cases;
+    });
+
+     // Sort data
+  data.sort(function(b, a) {
+    return a.Percent_of_cases - b.Percent_of_cases;
   });
+  
+// set the dimensions and margins of the graph
+var margin = {top: 30, right: 30, bottom: 70, left: 60},
+    width = 460 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
 
-  // Set up SVG container
-  var svg = d3.select("#chart3")
-    .append("svg")
-    .attr("width", "100%")
-    .attr("height", "100%")
-    .attr("viewBox", "0 0 800 400")
-    .append("g")
-    .attr("transform", "translate(50, 50)");
+// append the svg object to the body of the page
+var svg = d3.select("#chart3")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
 
-  // Set up scales and axes
-  var xScale = d3.scaleBand()
-    .domain(data.map(function(d) { return d.Age_group; }))
-    .range([0, 700])
-    .padding(0.1);
+// X axis
+var x = d3.scaleBand()
+.range([ 0, width ])
+.domain(data.map(function(d) { return d.Age_group; }))
+.padding(0.2);
+svg.append("g")
+.attr("transform", "translate(0," + height + ")")
+.call(d3.axisBottom(x))
+.selectAll("text")
+  .attr("transform", "translate(-10,0)rotate(-45)")
+  .style("text-anchor", "end");
 
-  var yScale = d3.scaleLinear()
-    .domain([0, d3.max(data, function(d) { return d.Percent_of_cases; })])
-    .range([300, 0]);
+// Add Y axis
+var y = d3.scaleLinear()
+.domain([0, 25])
+.range([ height, 0]);
+svg.append("g")
+.call(d3.axisLeft(y));
 
-  var xAxis = d3.axisBottom(xScale);
-  var yAxis = d3.axisLeft(yScale);
-
-  svg.append("g")
-    .attr("class", "x-axis")
-    .attr("transform", "translate(0, 300)")
-    .call(xAxis);
-
-  svg.append("g")
-    .attr("class", "y-axis")
-    .call(yAxis);
-
-  // Draw the bars for Percent_of_cases
-  svg.selectAll(".bar")
-    .data(data)
-    .enter()
-    .append("rect")
-    .attr("class", "bar")
-    .attr("x", function(d) { return xScale(d.Age_group); })
-    .attr("y", function(d) { return yScale(d.Percent_of_cases); })
-    .attr("width", xScale.bandwidth())
-    .attr("height", function(d) { return 300 - yScale(d.Percent_of_cases); })
-    .attr("fill", "steelblue"); // Set the fill color for the bars
-});
+// Bars
+svg.selectAll("bar")
+.data(data)
+.enter()
+.append("rect")
+  .attr("x", function(d) { return x(d.Age_group); })
+  .attr("y", function(d) { return y(d.Percent_of_cases); })
+  .attr("width", x.bandwidth())
+  .attr("height", function(d) { return height - y(d.Percent_of_cases); })
+  .attr("fill", "#69b3a2")
+  });
