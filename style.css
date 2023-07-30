@@ -22,10 +22,6 @@ h1 {
   stroke-width: 2;
 }
 
-/* Styling for the bars representing Percent_of_cases */
-.bar {
-  fill: steelblue; /* Set the fill color for Percent_of_cases bars */
-}
 
 /* Styling for the bars representing Percent_of_US_population */
 .bar2 {
@@ -47,3 +43,26 @@ h1 {
   margin-top: 20px; /* Add margin between heading and chart */
 }
 
+    .chart {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .bar {
+      fill: steelblue;
+    }
+
+    .bar.us-population {
+      fill: orange;
+    }
+
+    .bar text {
+      font-size: 14px;
+      fill: #fff;
+      text-anchor: middle;
+    }
+
+    .axis text {
+      font-size: 12px;
+    }
