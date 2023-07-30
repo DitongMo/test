@@ -7,7 +7,7 @@ d3.csv("US_vaccine_cummulative_trend.csv").then(function(data) {
   });
 
   // Set up SVG container
-  var svg = d3.select("#chart")
+  var svg = d3.select("#chart1")
     .append("svg")
     .attr("width", "100%")
     .attr("height", "100%")
