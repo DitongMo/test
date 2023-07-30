@@ -3,7 +3,6 @@ d3.csv("cases_by_age_group.csv").then(function(data) {
   // Convert percentage values to numbers
   data.forEach(function(d) {
     d.Percent_of_cases = +d.Percent_of_cases;
-    d.Percent_of_US_population = +d.Percent_of_US_population;
   });
 
   // Set up SVG container
@@ -22,7 +21,7 @@ d3.csv("cases_by_age_group.csv").then(function(data) {
     .padding(0.1);
 
   var yScale = d3.scaleLinear()
-    .domain([0, d3.max(data, function(d) { return d3.max([d.Percent_of_cases, d.Percent_of_US_population]); })])
+    .domain([0, d3.max(data, function(d) { return d.Percent_of_cases; })])
     .range([300, 0]);
 
   var xAxis = d3.axisBottom(xScale);
@@ -43,21 +42,9 @@ d3.csv("cases_by_age_group.csv").then(function(data) {
     .enter()
     .append("rect")
     .attr("class", "bar")
-    .attr("x", function(d) { return xScale(d.Age_group) - xScale.bandwidth() / 4; }) // Shift the bar to the left
+    .attr("x", function(d) { return xScale(d.Age_group); })
     .attr("y", function(d) { return yScale(d.Percent_of_cases); })
-    .attr("width", xScale.bandwidth() / 2) // Adjust the width for grouped bars
+    .attr("width", xScale.bandwidth())
     .attr("height", function(d) { return 300 - yScale(d.Percent_of_cases); })
-    .attr("fill", "steelblue"); // Set the fill color for Percent_of_cases bars
-
-  // Draw the bars for Percent_of_US_population
-  svg.selectAll(".bar2")
-    .data(data)
-    .enter()
-    .append("rect")
-    .attr("class", "bar2")
-    .attr("x", function(d) { return xScale(d.Age_group) + xScale.bandwidth() / 4; }) // Shift the bar to the right
-    .attr("y", function(d) { return yScale(d.Percent_of_US_population); })
-    .attr("width", xScale.bandwidth() / 2) // Adjust the width for grouped bars
-    .attr("height", function(d) { return 300 - yScale(d.Percent_of_US_population); })
-    .attr("fill", "orange"); // Set the fill color for Percent_of_US_population bars
+    .attr("fill", "steelblue"); // Set the fill color for the bars
 });
