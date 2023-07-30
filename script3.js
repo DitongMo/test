@@ -7,7 +7,7 @@ d3.csv("cases_by_age_group.csv").then(function(data) {
   });
 
   // Set up SVG container
-  var svg = d3.select("#chart")
+  var svg = d3.select("#chart3")
     .append("svg")
     .attr("width", "100%")
     .attr("height", "100%")
