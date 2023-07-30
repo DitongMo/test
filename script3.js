@@ -13,21 +13,21 @@ var svg = d3.select("#chart3")
           "translate(" + margin.left + "," + margin.top + ")");
 
 // Load the data from CSV file
-d3.csv("cases_by_age_group.csv").then(function(data) {
+d3.csv("cases_by_age_group_v2.csv").then(function(data) {
     // Convert percentage values to numbers
   //   data.forEach(function(d) {
-  //     d.Percent_of_cases = +d.Percent_of_cases;
+  //     d.percent_of_cases = +d.percent_of_cases;
   //   });
 
   //    // Sort data
   // data.sort(function(b, a) {
-  //   return a.Percent_of_cases - b.Percent_of_cases;
+  //   return a.percent_of_cases - b.percent_of_cases;
   // });
   
 // X axis
 var x = d3.scaleBand()
 .range([ 0, width ])
-.domain(data.map(function(d) { return d.Age_group; }))
+.domain(data.map(function(d) { return d.age_group; }))
 .padding(0.2);
 svg.append("g")
 .attr("transform", "translate(0," + height + ")")
@@ -48,9 +48,9 @@ svg.selectAll("bar")
 .data(data)
 .enter()
 .append("rect")
-  .attr("x", function(d) { return x(d.Age_group); })
-  .attr("y", function(d) { return y(d.Percent_of_cases); })
+  .attr("x", function(d) { return x(d.age_group); })
+  .attr("y", function(d) { return y(d.percent_of_cases); })
   .attr("width", x.bandwidth())
-  .attr("height", function(d) { return height - y(d.Percent_of_cases); })
+  .attr("height", function(d) { return height - y(d.percent_of_cases); })
   .attr("fill", "#69b3a2")
   });
