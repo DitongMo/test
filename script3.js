@@ -19,8 +19,7 @@ d3.csv("cases_by_age_group.csv").then(function(data) {
   var xScale = d3.scaleBand()
     .domain(data.map(function(d) { return d.Age_group; }))
     .range([0, 700])
-    .paddingInner(0.2) // Adjust the padding between groups
-    .paddingOuter(0.2); // Adjust the padding on the outer side
+    .padding(0.1);
 
   var yScale = d3.scaleLinear()
     .domain([0, d3.max(data, function(d) { return d3.max([d.Percent_of_cases, d.Percent_of_US_population]); })])
@@ -44,10 +43,11 @@ d3.csv("cases_by_age_group.csv").then(function(data) {
     .enter()
     .append("rect")
     .attr("class", "bar")
-    .attr("x", function(d) { return xScale(d.Age_group); })
+    .attr("x", function(d) { return xScale(d.Age_group) - xScale.bandwidth() / 4; }) // Shift the bar to the left
     .attr("y", function(d) { return yScale(d.Percent_of_cases); })
     .attr("width", xScale.bandwidth() / 2) // Adjust the width for grouped bars
-    .attr("height", function(d) { return 300 - yScale(d.Percent_of_cases); });
+    .attr("height", function(d) { return 300 - yScale(d.Percent_of_cases); })
+    .attr("fill", "steelblue"); // Set the fill color for Percent_of_cases bars
 
   // Draw the bars for Percent_of_US_population
   svg.selectAll(".bar2")
@@ -55,8 +55,9 @@ d3.csv("cases_by_age_group.csv").then(function(data) {
     .enter()
     .append("rect")
     .attr("class", "bar2")
-    .attr("x", function(d) { return xScale(d.Age_group) + xScale.bandwidth() / 2; }) // Shift the bar to the right for grouping
+    .attr("x", function(d) { return xScale(d.Age_group) + xScale.bandwidth() / 4; }) // Shift the bar to the right
     .attr("y", function(d) { return yScale(d.Percent_of_US_population); })
     .attr("width", xScale.bandwidth() / 2) // Adjust the width for grouped bars
-    .attr("height", function(d) { return 300 - yScale(d.Percent_of_US_population); });
+    .attr("height", function(d) { return 300 - yScale(d.Percent_of_US_population); })
+    .attr("fill", "orange"); // Set the fill color for Percent_of_US_population bars
 });
