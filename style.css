@@ -4,12 +4,6 @@ body {
   padding: 0;
 }
 
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
 h1 {
   text-align: center;
 }
@@ -17,6 +11,8 @@ h1 {
 #chart {
   width: 100%;
   height: 400px;
+  margin-top: 20px; /* Add margin between heading and chart */
+
 }
 
 /* Add CSS styles for the line chart */
@@ -25,3 +21,18 @@ h1 {
   stroke: blue; /* You can change the color here */
   stroke-width: 2;
 }
+
+.container {
+  max-width: 800px;
+  margin: 20px auto; /* Add margin to create space between containers */
+  padding: 20px;
+  border: 1px solid #ccc; /* Optional: Add border for visual separation */
+}
+
+
+#chart1, #chart2 {
+  width: 100%;
+  height: 400px;
+  margin-top: 20px; /* Add margin between heading and chart */
+}
+
