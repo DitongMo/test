@@ -56,6 +56,10 @@ h1 {
     .bar.us-population {
       fill: orange;
     }
+    .bar.cases {
+      fill: steelblue;
+    }
+
 
     .bar text {
       font-size: 14px;
