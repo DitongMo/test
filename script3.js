@@ -1,15 +1,3 @@
-// Load the data from CSV file
-d3.csv("cases_by_age_group.csv").then(function(data) {
-    // Convert percentage values to numbers
-    data.forEach(function(d) {
-      d.Percent_of_cases = +d.Percent_of_cases;
-    });
-
-     // Sort data
-  data.sort(function(b, a) {
-    return a.Percent_of_cases - b.Percent_of_cases;
-  });
-  
 // set the dimensions and margins of the graph
 var margin = {top: 30, right: 30, bottom: 70, left: 60},
     width = 460 - margin.left - margin.right,
@@ -24,6 +12,18 @@ var svg = d3.select("#chart3")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 
+// Load the data from CSV file
+d3.csv("cases_by_age_group.csv").then(function(data) {
+    // Convert percentage values to numbers
+  //   data.forEach(function(d) {
+  //     d.Percent_of_cases = +d.Percent_of_cases;
+  //   });
+
+  //    // Sort data
+  // data.sort(function(b, a) {
+  //   return a.Percent_of_cases - b.Percent_of_cases;
+  // });
+  
 // X axis
 var x = d3.scaleBand()
 .range([ 0, width ])
