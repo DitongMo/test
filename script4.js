@@ -2,8 +2,8 @@
 d3.csv('cases_by_age_group.csv').then(data => {
   // Data preprocessing
   data.forEach(d => {
-    d.Percent_of_cases = +d.Percent_of_cases;
-    d.Percent_of_US_population = +d.Percent_of_US_population;
+    d.percent_of_cases = +d.Percent_of_cases;
+    d.percent_of_us_population = +d.percent_of_us_population;
   });
 
   // Define the dimensions of the chart
@@ -21,12 +21,12 @@ d3.csv('cases_by_age_group.csv').then(data => {
 
   // Define the x and y scales
   const xScale = d3.scaleBand()
-    .domain(data.map(d => d['Age Group']))
+    .domain(data.map(d => d.age_group))
     .range([0, width])
     .padding(0.1);
 
   const yScale = d3.scaleLinear()
-    .domain([0, d3.max(data, d => Math.max(d.Percent_of_cases, d.Percent_of_US_population))])
+    .domain([0, d3.max(data, d => Math.max(d.percent_of_cases, d.percent_of_us_population))])
     .range([height, 0]);
 
   // Create the bars for "Percent of Cases"
@@ -35,10 +35,10 @@ d3.csv('cases_by_age_group.csv').then(data => {
     .enter()
     .append('rect')
     .attr('class', 'bar')
-    .attr('x', d => xScale(d['Age Group']))
-    .attr('y', d => yScale(d.Percent_of_cases))
+    .attr('x', d => xScale(d.age_group)
+    .attr('y', d => yScale(d.percent_of_cases))
     .attr('width', xScale.bandwidth() / 2)
-    .attr('height', d => height - yScale(d.Percent_of_cases));
+    .attr('height', d => height - yScale(d.percent_of_us_population));
 
   // Create the bars for "Percent of US Population"
   svg.selectAll('.bar-population')
@@ -46,10 +46,10 @@ d3.csv('cases_by_age_group.csv').then(data => {
     .enter()
     .append('rect')
     .attr('class', 'bar us-population')
-    .attr('x', d => xScale(d['Age Group']) + xScale.bandwidth() / 2)
-    .attr('y', d => yScale(d.Percent_of_US_population))
+    .attr('x', d => xScale(d.age_group) + xScale.bandwidth() / 2)
+    .attr('y', d => yScale(d.percent_of_us_population))
     .attr('width', xScale.bandwidth() / 2)
-    .attr('height', d => height - yScale(d.Percent_of_US_population));
+    .attr('height', d => height - yScale(d.percent_of_us_population));
 
   // Add x-axis
   svg.append('g')
