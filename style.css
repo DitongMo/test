@@ -18,3 +18,10 @@ h1 {
   width: 100%;
   height: 400px;
 }
+
+/* Add CSS styles for the line chart */
+.line {
+  fill: none;
+  stroke: blue; /* You can change the color here */
+  stroke-width: 2;
+}
