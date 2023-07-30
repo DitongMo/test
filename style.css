@@ -22,6 +22,17 @@ h1 {
   stroke-width: 2;
 }
 
+/* Styling for the bars representing Percent_of_cases */
+.bar {
+  fill: steelblue; /* Set the fill color for Percent_of_cases bars */
+}
+
+/* Styling for the bars representing Percent_of_US_population */
+.bar2 {
+  fill: orange; /* Set the fill color for Percent_of_US_population bars */
+}
+
+
 .container {
   max-width: 800px;
   margin: 20px auto; /* Add margin to create space between containers */
