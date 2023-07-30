@@ -1,5 +1,5 @@
 // Load the data from CSV file
-d3.csv("data.csv").then(function(data) {
+d3.csv("US_vaccine_cummulative_trend.csv").then(function(data) {
   // Convert date strings to Date objects
   data.forEach(function(d) {
     d.date = new Date(d.date);
