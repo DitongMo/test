@@ -4,9 +4,9 @@ d3.csv('interactive_trend.csv').then(function(data) {
   const parseDate = d3.timeParse("%m/%d/%y");
   data.forEach(function(d) {
     d.Date = parseDate(d.Date);
-    d.Administered_Cumulative = +d.Administered_Cumulative;
-    d.Series_Complete_Cumulative = +d.Series_Complete_Cumulative;
-    d.Booster_Cumulative = +d.Booster_Cumulative;
+    d.Administered_Dose1_Pop_Pct = +d.Administered_Dose1_Pop_Pct;
+    d.Series_Complete_Pop_Pct = +d.Series_Complete_Pop_Pct;
+    d.Bivalent_Booster_Pop_Pct = +d.Bivalent_Booster_Pop_Pct;
   });
 
   // Set up the chart dimensions
@@ -24,7 +24,7 @@ d3.csv('interactive_trend.csv').then(function(data) {
     .attr("transform", "translate(50, 50)");
 
   // Set the initial y-value to display
-  let yValue = "Administered_Cumulative";
+  let yValue = "Administered_Dose1_Pop_Pct";
 
   // Function to update the line chart based on selected y-value
   function updateChart(selectedYValue) {
@@ -58,13 +58,13 @@ d3.csv('interactive_trend.csv').then(function(data) {
 
   // Initial y scale based on Administered_Cumulative
   const yScale = d3.scaleLinear()
-    .domain([0, d3.max(data, d => d.Administered_Cumulative)])
+    .domain([0, d3.max(data, d => d.Administered_Dose1_Pop_Pct)])
     .range([height, 0]);
 
   // Initial line function based on Administered_Cumulative
   const line = d3.line()
     .x(d => xScale(d.Date))
-    .y(d => yScale(d.Administered_Cumulative));
+    .y(d => yScale(d.Administered_Dose1_Pop_Pct));
 
   // Add the initial line to the chart
   svg.append("path")
@@ -82,7 +82,7 @@ d3.csv('interactive_trend.csv').then(function(data) {
     .call(d3.axisLeft(yScale));
 
   // Button event listeners to update the chart
-  document.getElementById("administered-button").addEventListener("click", () => updateChart("Administered_Cumulative"));
-  document.getElementById("series-complete-button").addEventListener("click", () => updateChart("Series_Complete_Cumulative"));
-  document.getElementById("booster-button").addEventListener("click", () => updateChart("Booster_Cumulative"));
+  document.getElementById("administered-button").addEventListener("click", () => updateChart("Administered_Dose1_Pop_Pct"));
+  document.getElementById("series-complete-button").addEventListener("click", () => updateChart("Series_Complete_Pop_Pct"));
+  document.getElementById("booster-button").addEventListener("click", () => updateChart("Bivalent_Booster_Pop_Pct"));
 });
