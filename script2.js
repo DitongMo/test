@@ -16,10 +16,12 @@ d3.csv('interactive_trend.csv').then(function(data) {
 
   // Create the SVG element
   const svg = d3.select("#chart2")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
+    .append("svg")
+    .attr("width", "100%")
+    .attr("height", "100%")
+    .attr("viewBox", "0 0 800 400")
     .append("g")
-    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+    .attr("transform", "translate(50, 50)");
 
   // Set the initial y-value to display
   let yValue = "Administered_Cumulative";
