@@ -15,7 +15,7 @@ d3.csv('interactive_trend.csv').then(function(data) {
   const height = 400 - margin.top - margin.bottom;
 
   // Create the SVG element
-  const svg = d3.select("chart3")
+  const svg = d3.select("#chart2")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
