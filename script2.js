@@ -14,9 +14,8 @@ const svg = d3.select('chart2')
 // Load the data from CSV file
 d3.csv('interactive_trend.csv').then(function(data) {
   // Parse date
-  const parseDate = d3.timeParse('%m/%d/%Y');
-  data.forEach(d => {
-    d.Date = parseDate(d.Date);
+  data.forEach(function(d) {
+    d.Date = new Date(d.Date);
     d.Administered_Cumulative = +d.Administered_Cumulative;
     d.Series_Complete_Cumulative = +d.Series_Complete_Cumulative;
     d.Booster_Cumulative = +d.Booster_Cumulative;
