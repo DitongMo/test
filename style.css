@@ -60,14 +60,25 @@ p {
   margin: 20px auto; /* Add margin to create space between containers */
   padding: 20px;
   border: 1px solid #ccc; /* Optional: Add border for visual separation */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
 }
 
 
-#chart1, #chart2,#chart3,#chart4, #chart5{
+#chart1, #chart2,#chart3,#chart4{
   width: 100%;
   height: 400px;
   margin-top: 20px; /* Add margin between heading and chart */
 }
+
+#chart5{
+  width: 100%;
+  height: 400px;
+  margin-top: 20px; /* Add margin between heading and chart */
+}
+
 
     .chart {
       display: flex;
