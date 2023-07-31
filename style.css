@@ -26,6 +26,23 @@ p {
   stroke-width: 2;
 }
 
+    .administered-line {
+      stroke: steelblue;
+    }
+
+    .series-complete-line {
+      stroke: orange;
+    }
+
+    .booster-line {
+      stroke: green;
+    }
+
+    #chart-container {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+    }
 
 /* Styling for the bars representing Percent_of_US_population */
 .bar2 {
