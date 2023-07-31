@@ -31,9 +31,10 @@ d3.csv('interactive_trend.csv').then(function(data) {
     // Update the yValue
     yValue = selectedYValue;
 
-    // Set the y scale based on the selected y-value
+    // Set the y scale based on the maximum value of all three y-values
+    const maxValue = d3.max(data, d => d3.max([d.Administered_Dose1_Pop_Pct, d.Series_Complete_Pop_Pct, d.Bivalent_Booster_Pop_Pct]));
     const yScale = d3.scaleLinear()
-      .domain([0, d3.max(data, d => d[yValue])])
+      .domain([0, maxValue])
       .range([height, 0]);
 
     // Create the line function for the selected y-value
@@ -55,11 +56,6 @@ d3.csv('interactive_trend.csv').then(function(data) {
   const xScale = d3.scaleTime()
     .domain(d3.extent(data, d => d.Date))
     .range([0, width]);
-
-  // Initial y scale based on Administered_Cumulative
-  const yScale = d3.scaleLinear()
-    .domain([0, d3.max(data, d => d.Administered_Dose1_Pop_Pct)])
-    .range([height, 0]);
 
   // Initial line function based on Administered_Cumulative
   const line = d3.line()
